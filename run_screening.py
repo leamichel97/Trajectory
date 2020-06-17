@@ -62,7 +62,7 @@ pb.model.add_design_var('r_M', lower=-sys.float_info.max, upper=sys.float_info.m
 pb.model.add_design_var('V1', lower=-sys.float_info.max, upper=sys.float_info.max)
 
 
-pb.model.add_objective('a2')
+pb.model.add_objective('a')
 pb.model.add_objective('e')
 pb.model.add_objective('h')
 pb.model.add_objective('p')
@@ -86,7 +86,7 @@ data['inputs']['gamma'] = np.zeros((n,)+(1,))
 data['inputs']['mu'] = np.zeros((n,)+(1,))
 data['inputs']['r_M'] = np.zeros((n,)+(1,))
 data['inputs']['V1'] = np.zeros((n,)+(1,))
-data['outputs']['a2'] = np.zeros((n,)+(1,))
+data['outputs']['a'] = np.zeros((n,)+(1,))
 data['outputs']['e'] = np.zeros((n,)+(1,))
 data['outputs']['h'] = np.zeros((n,)+(1,))
 data['outputs']['p'] = np.zeros((n,)+(1,))
@@ -102,7 +102,7 @@ for i in range(len(cases)):
     data['inputs']['mu'][i,:] = case.outputs['mu']
     data['inputs']['r_M'][i,:] = case.outputs['r_M']
     data['inputs']['V1'][i,:] = case.outputs['V1']
-    data['outputs']['a2'][i,:] = case.outputs['a2']
+    data['outputs']['a'][i,:] = case.outputs['a']
     data['outputs']['e'][i,:] = case.outputs['e']
     data['outputs']['h'][i,:] = case.outputs['h']
     data['outputs']['p'][i,:] = case.outputs['p']
@@ -114,8 +114,8 @@ salib_pb = pb.driver.get_salib_problem()
 inputs = pb.driver.get_cases()
 
 print('')
-print('*** Output: a2')
-output = data['outputs']['a2'].reshape((-1,))
+print('*** Output: a')
+output = data['outputs']['a'].reshape((-1,))
 
 if options.sobol:  
     Si = sobol.analyze(salib_pb, output, 
@@ -125,13 +125,13 @@ if options.sobol:
     fig, axes = plt.subplots(1, len(Si_df))
     for idx, f in enumerate(Si_df):
         axes[idx] = barplot(f, ax=axes[idx])
-    fig.suptitle('a2 '+'sensitivity')
+    fig.suptitle('a '+'sensitivity')
 
 else:
     Si = morris.analyze(salib_pb, inputs, output, print_to_console=True)
 
     fig, (ax1, ax2) = plt.subplots(1,2)
-    fig.suptitle('a2 '+'sensitivity')
+    fig.suptitle('a '+'sensitivity')
 
     mp.horizontal_bar_plot(ax1, Si, {})
     mp.covariance_plot(ax2, Si, {})

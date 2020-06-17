@@ -50,7 +50,7 @@ pb.model.add_design_var('r_M', lower=-sys.float_info.max, upper=sys.float_info.m
 pb.model.add_design_var('V1', lower=-sys.float_info.max, upper=sys.float_info.max)
 
 
-pb.model.add_objective('a2')
+pb.model.add_objective('a')
 pb.model.add_objective('e')
 pb.model.add_objective('h')
 pb.model.add_objective('p')
@@ -76,7 +76,7 @@ data['inputs']['mu'] = np.zeros((n,)+(1,))
 data['inputs']['r_M'] = np.zeros((n,)+(1,))
 data['inputs']['V1'] = np.zeros((n,)+(1,))
 
-data['outputs']['a2'] = np.zeros((n,)+(1,))
+data['outputs']['a'] = np.zeros((n,)+(1,))
 data['outputs']['e'] = np.zeros((n,)+(1,))
 data['outputs']['h'] = np.zeros((n,)+(1,))
 data['outputs']['p'] = np.zeros((n,)+(1,))
@@ -92,7 +92,7 @@ for i in range(len(cases)):
     data['inputs']['mu'][i,:] = case.outputs['mu']
     data['inputs']['r_M'][i,:] = case.outputs['r_M']
     data['inputs']['V1'][i,:] = case.outputs['V1']
-    data['outputs']['a2'][i,:] = case.outputs['a2']
+    data['outputs']['a'][i,:] = case.outputs['a']
     data['outputs']['e'][i,:] = case.outputs['e']
     data['outputs']['h'][i,:] = case.outputs['h']
     data['outputs']['p'][i,:] = case.outputs['p']
@@ -101,12 +101,12 @@ for i in range(len(cases)):
     data['outputs']['V2'][i,:] = case.outputs['V2']
       
 
-output = data['outputs']['a2'].reshape(-1)
+output = data['outputs']['a'].reshape(-1)
 
 input = data['inputs']['alpha'].reshape(-1)
 plt.subplot(7, 6, 1)
 plt.plot(input[0::1], output[0::1], '.')
-plt.ylabel('a2')
+plt.ylabel('a')
 plt.xlabel('alpha')
 
 input = data['inputs']['DeltaV'].reshape(-1)

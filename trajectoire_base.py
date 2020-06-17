@@ -54,7 +54,7 @@ class TrajectoireBase(Group):
         indeps.add_output('mu', 1.0)
         indeps.add_output('r_M', 1.0)
         indeps.add_output('V1', 1.0)
-        self.add_subsystem('Trajectory', self.create_trajectory(), promotes=['a2', 'alpha', 'DeltaV', 'e', 'gamma', 'h', 'mu', 'p', 'ra', 'rp', 'r_M', 'V1', 'V2'])
+        self.add_subsystem('Trajectory', self.create_trajectory(), promotes=['a', 'alpha', 'DeltaV', 'e', 'gamma', 'h', 'mu', 'p', 'ra', 'rp', 'r_M', 'V1', 'V2'])
 
     def create_trajectory(self):
     	return Trajectory()

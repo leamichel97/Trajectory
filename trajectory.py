@@ -14,29 +14,14 @@ class Trajectory(TrajectoryBase):
             # Docking mechanism: use implementation if referenced in .whatsopt_dock.yml file
             self._impl.compute(inputs, outputs)
         else:
-            alpha = inputs['alpha']
-            DeltaV = inputs['DeltaV']
-            gamma = inputs['gamma']
-            mu = inputs['mu']
-            r_M = inputs['r_M']
-            V1 = inputs['V1']
-
-            V2 = np.sqrt(V1**2 + DeltaV**2 + 2 * DeltaV * V1 * np.cos(alpha))
-            a = (r_M * mu) / ((2 * mu) - (V2 * r_M))
-            h = r_M * V2 * np.cos(gamma)
-            p = h**2 / mu
-            e = np.sqrt(1 - p/a) 
-            rp = a * (1-e)
-            ra = a * (1+e)
-
-
-            outputs['a']= a
-            outputs['e'] = e
-            outputs['h'] = h
-            outputs['p'] = p
-            outputs['ra'] = ra
-            outputs['rp'] = rp 
-            outputs['V2'] = V2  
+                    
+            outputs['a'] = 1.0 
+            outputs['e'] = 1.0 
+            outputs['h'] = 1.0 
+            outputs['p'] = 1.0 
+            outputs['ra'] = 1.0 
+            outputs['rp'] = 1.0 
+            outputs['V2'] = 1.0   
 
 # Reminder: inputs of compute()
 #   
@@ -56,12 +41,12 @@ class Trajectory(TrajectoryBase):
 #    def compute_partials(self, inputs, partials):
 #        """ Jacobian for Trajectory """
 #   
-#       	partials['a2', 'alpha'] = np.zeros((1, 1))
-#       	partials['a2', 'DeltaV'] = np.zeros((1, 1))
-#       	partials['a2', 'gamma'] = np.zeros((1, 1))
-#       	partials['a2', 'mu'] = np.zeros((1, 1))
-#       	partials['a2', 'r_M'] = np.zeros((1, 1))
-#       	partials['a2', 'V1'] = np.zeros((1, 1))
+#       	partials['a', 'alpha'] = np.zeros((1, 1))
+#       	partials['a', 'DeltaV'] = np.zeros((1, 1))
+#       	partials['a', 'gamma'] = np.zeros((1, 1))
+#       	partials['a', 'mu'] = np.zeros((1, 1))
+#       	partials['a', 'r_M'] = np.zeros((1, 1))
+#       	partials['a', 'V1'] = np.zeros((1, 1))
 #       	partials['e', 'alpha'] = np.zeros((1, 1))
 #       	partials['e', 'DeltaV'] = np.zeros((1, 1))
 #       	partials['e', 'gamma'] = np.zeros((1, 1))

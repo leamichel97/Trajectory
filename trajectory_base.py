@@ -37,7 +37,7 @@ class TrajectoryBase(ExplicitComponent):
         self.add_input('r_M', val=1.0, desc='')
         self.add_input('V1', val=1.0, desc='')
 
-        self.add_output('a2', val=1.0, desc='')
+        self.add_output('a', val=1.0, desc='')
 
         self.add_output('e', val=1.0, desc='')
 
