@@ -13,16 +13,29 @@ class Trajectory(TrajectoryBase):
         if self._impl:
             # Docking mechanism: use implementation if referenced in .whatsopt_dock.yml file
             self._impl.compute(inputs, outputs)
-        else:
-                    
-            outputs['a'] = 1.0 
-            outputs['e'] = 1.0 
-            outputs['h'] = 1.0 
-            outputs['p'] = 1.0 
-            outputs['ra'] = 1.0 
-            outputs['rp'] = 1.0 
-            outputs['V2'] = 1.0   
+        else:     
+            alpha = inputs['alpha']
+            DeltaV = inputs['DeltaV']
+            gamma = inputs['gamma']
+            mu = inputs['mu']
+            r_M = inputs['r_M']
+            V1 = inputs['V1']
 
+            V2 = np.sqrt(V1**2 + DeltaV**2 + 2 * DeltaV * V1 * np.cos(alpha))
+            a = (r_M * mu) / ((2 * mu) - (V2 * r_M))
+            h = r_M * V2 * np.cos(gamma)
+            p = h**2 / mu
+            e = np.sqrt(1 - p/a) 
+            rp = a * (1-e)
+            ra = a * (1+e)
+
+            outputs['a']= a
+            outputs['e'] = e
+            outputs['h'] = h
+            outputs['p'] = p
+            outputs['ra'] = ra
+            outputs['rp'] = rp 
+            outputs['V2'] = V2
 # Reminder: inputs of compute()
 #   
 #       inputs['alpha'] -> shape: 1, type: Float    
