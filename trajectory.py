@@ -36,6 +36,7 @@ class Trajectory(TrajectoryBase):
             outputs['ra'] = ra
             outputs['rp'] = rp 
             outputs['V2'] = V2
+        return outputs
 # Reminder: inputs of compute()
 #   
 #       inputs['alpha'] -> shape: 1, type: Float    
