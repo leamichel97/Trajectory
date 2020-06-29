@@ -7,12 +7,12 @@ from numpy import nan
 
 def initialize(mda):
 
-    mda['alpha'] = 1.0
+    mda['alpha'] = 20.0
     mda['DeltaV'] = 1.0
     mda['gamma'] = 1.0
-    mda['mu'] = 1.0
-    mda['r_M'] = 1.0
-    mda['V1'] = 1.0
+    mda['mu'] = 398600
+    mda['r_M'] = 6388.0 # R_t + 10 km
+    mda['V1'] = 179.7
 
 
 
