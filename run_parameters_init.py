@@ -7,7 +7,7 @@ from numpy import nan
 
 def initialize(mda):
 
-    mda['alpha'] = 0 # en degrès
+    mda['alpha'] = 20 # en degrès
     mda['DeltaV'] = 7.9 # en km/s
     mda['mu'] = 398600 # en km/s^-2
     mda['r_M'] = 6388.0 # R_t + 10 km 
